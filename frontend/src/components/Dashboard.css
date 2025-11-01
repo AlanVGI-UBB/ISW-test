@@ -1,0 +1,266 @@
+.dashboard-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 70px;
+  padding-top: 60px;
+}
+
+.dashboard-banner-wrapper {
+  background: #003366;
+  width: 100%;
+}
+
+.dashboard-banner {
+  background: transparent;
+  color: white;
+  padding: 1.5rem 1.5rem 3rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dashboard-banner h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.user-role-text {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  max-width: 900px;
+  margin: -2rem auto 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.section-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f1f1f;
+  margin: 0 0 1rem 0;
+}
+
+.section-description {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.commission-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.commission-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.commission-item:first-child {
+  padding-top: 0;
+}
+
+.commission-icon {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.commission-details {
+  flex: 1;
+}
+
+.commission-details h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin: 0 0 0.25rem 0;
+}
+
+.commission-location {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.commission-date {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin: 0.15rem 0 0 0;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-green {
+  background: #10b981;
+}
+
+.status-yellow {
+  background: #f59e0b;
+}
+
+.action-button {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  background: #002244;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.result-item:first-child {
+  padding-top: 0;
+}
+
+.result-icon {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.result-details {
+  flex: 1;
+}
+
+.result-details h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin: 0 0 0.25rem 0;
+}
+
+.result-date {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.result-score {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f1f1f;
+  flex-shrink: 0;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  flex: 1;
+  max-width: 100px;
+}
+
+.nav-item span {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.nav-item.active {
+  color: #003366;
+}
+
+.nav-item:hover {
+  color: #003366;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header h1 {
+    font-size: 0.9rem;
+  }
+
+  .dashboard-banner h2 {
+    font-size: 1.25rem;
+  }
+
+  .dashboard-content {
+    padding: 0 1rem 1rem 1rem;
+    margin-top: -2rem;
+  }
+
+  .section-card {
+    padding: 1.25rem;
+  }
+}

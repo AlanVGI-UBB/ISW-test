@@ -1,0 +1,28 @@
+{
+  "name": "evaluaciones-orales-pern",
+  "version": "1.0.0",
+  "description": "Sistema de Evaluaciones Orales - Facultad de Derecho (PERN Stack)",
+  "main": "index.js",
+  "scripts": {
+    "setup": "powershell -ExecutionPolicy Bypass -File ./setup.ps1",
+    "start": "powershell -ExecutionPolicy Bypass -File ./start.ps1",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "pern",
+    "postgresql",
+    "express",
+    "react",
+    "nodejs",
+    "evaluaciones",
+    "derecho"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
