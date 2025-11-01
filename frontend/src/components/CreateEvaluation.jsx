@@ -6,6 +6,7 @@ import Header from './Header';
 const CreateEvaluation = ({ user }) => {
   const navigate = useNavigate();
   const [showExitModal, setShowExitModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
   const [formData, setFormData] = useState({
     asignatura: '',
@@ -27,9 +28,22 @@ const CreateEvaluation = ({ user }) => {
     setShowExitModal(true);
   };
 
+  const handleCancelClick = () => {
+    setShowCancelModal(true);
+  };
+
   const handleCancelExit = () => {
     setShowExitModal(false);
     setPendingNavigation(null);
+  };
+
+  const handleCancelModalClose = () => {
+    setShowCancelModal(false);
+  };
+
+  const handleConfirmCancel = () => {
+    setShowCancelModal(false);
+    navigate('/evaluations');
   };
 
   const handleConfirmExit = () => {
@@ -138,7 +152,7 @@ const CreateEvaluation = ({ user }) => {
           </div>
 
           <div className="form-actions">
-            <button type="button" className="cancel-button" onClick={() => handleNavigateWithWarning('/evaluations')}>
+            <button type="button" className="cancel-button" onClick={handleCancelClick}>
               Cancelar
             </button>
             <button type="submit" className="submit-button">
@@ -148,7 +162,7 @@ const CreateEvaluation = ({ user }) => {
         </form>
       </div>
 
-      {/* Modal de confirmación */}
+      {/* Modal de confirmación de salida */}
       {showExitModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -162,6 +176,26 @@ const CreateEvaluation = ({ user }) => {
               </button>
               <button className="modal-confirm-btn" onClick={handleConfirmExit}>
                 Salir de todas formas
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de confirmación de cancelar */}
+      {showCancelModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 className="modal-title">¿Estás seguro?</h3>
+            <p className="modal-message">
+              ¿Estás seguro de que deseas cancelar la creación de esta evaluación?
+            </p>
+            <div className="modal-actions">
+              <button className="modal-cancel-btn" onClick={handleCancelModalClose}>
+                No, continuar editando
+              </button>
+              <button className="modal-confirm-btn" onClick={handleConfirmCancel}>
+                Sí, cancelar
               </button>
             </div>
           </div>
