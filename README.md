@@ -7,11 +7,24 @@ Sistema web completo para la gestión de evaluaciones orales desarrollado con el
 - ✅ Autenticación de usuarios (Login/Registro)
 - ✅ Recuperación de contraseña
 - ✅ Sistema de roles (Estudiante, Profesor, Admin)
-- ✅ Dashboard personalizado
-- ✅ Interfaz moderna y responsiva
+- ✅ Dashboard personalizado por rol
+- ✅ Gestión de Evaluaciones
+  - Vista diferenciada por rol (Estudiante vs Profesor/Admin)
+  - Crear, editar y eliminar evaluaciones (Profesor/Admin)
+  - Filtros por fecha, estado y modalidad
+  - Listado de evaluaciones con tabla
+- ✅ Pantalla de Configuración
+  - Tabs: Usuario y Aplicación
+  - Información de contacto
+  - Gestión de sesión (Logout)
+- ✅ Header fijo con botón de configuración
+- ✅ Navegación inferior con 3 opciones principales
+- ✅ Protección contra pérdida de datos al salir de formularios
+- ✅ Interfaz moderna y responsiva con diseño sobrio
 - ✅ Validación de datos en frontend y backend
 - ✅ Tokens JWT para sesiones seguras
 - ✅ Contraseñas encriptadas con bcrypt
+- ✅ Modo desarrollo con selector de roles
 
 ## 📋 Requisitos Previos
 
@@ -31,23 +44,34 @@ cd "d:\Proyectos\Proyecto ISW test"
 
 ### 2. Configurar la Base de Datos
 
-#### Opción A: Usando pgAdmin o herramienta GUI
+El proyecto está configurado para usar la base de datos `proyecto_isw_db`.
+
+#### Opción A: Usando Scripts PowerShell (Recomendado - Windows)
+
+```powershell
+# Desde la raíz del proyecto
+.\scripts\create-database.ps1
+```
+
+Este script creará automáticamente la base de datos y las tablas necesarias.
+
+#### Opción B: Usando pgAdmin o herramienta GUI
 
 1. Abre pgAdmin o tu cliente PostgreSQL preferido
-2. Crea una nueva base de datos llamada `evaluaciones_orales`
+2. Crea una nueva base de datos llamada `proyecto_isw_db`
 3. Ejecuta el script SQL ubicado en `backend/database/init.sql`
 
-#### Opción B: Usando línea de comandos
+#### Opción C: Usando línea de comandos
 
 ```bash
 # Conectarse a PostgreSQL
 psql -U postgres
 
 # Crear la base de datos
-CREATE DATABASE evaluaciones_orales;
+CREATE DATABASE proyecto_isw_db;
 
 # Conectarse a la base de datos
-\c evaluaciones_orales
+\c proyecto_isw_db
 
 # Ejecutar el script (desde el directorio backend)
 \i database/init.sql
@@ -66,14 +90,14 @@ npm install
 
 # Configurar variables de entorno
 # Edita el archivo .env con tus credenciales de PostgreSQL
-# Ya existe un archivo .env de ejemplo
+# Ya existe un archivo .env configurado
 
 # El archivo .env debe contener:
 # DB_HOST=localhost
 # DB_PORT=5432
 # DB_USER=postgres
 # DB_PASSWORD=tu_password
-# DB_NAME=evaluaciones_orales
+# DB_NAME=proyecto_isw_db
 # PORT=5000
 # JWT_SECRET=tu_clave_secreta
 ```
@@ -89,7 +113,16 @@ npm install
 
 ## 🚀 Ejecución
 
-### Opción 1: Ejecutar Backend y Frontend por separado
+### Opción 1: Script PowerShell (Recomendado - Windows)
+
+```powershell
+# Desde la raíz del proyecto
+.\scripts\start.ps1
+```
+
+Este script iniciará automáticamente el backend y el frontend en terminales separadas.
+
+### Opción 2: Ejecutar Backend y Frontend por separado
 
 #### Terminal 1 - Backend:
 ```bash
@@ -105,20 +138,6 @@ npm run dev
 # La aplicación estará disponible en http://localhost:5173
 ```
 
-### Opción 2: Usando un solo comando (requiere configuración adicional)
-
-Puedes instalar `concurrently` en la raíz del proyecto para ejecutar ambos:
-
-```bash
-# En la raíz del proyecto
-npm install concurrently --save-dev
-
-# Agregar script en package.json de la raíz:
-# "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
-
-npm run dev
-```
-
 ## 📱 Uso de la Aplicación
 
 ### Acceder a la aplicación
@@ -126,22 +145,33 @@ npm run dev
 1. Abre tu navegador en `http://localhost:5173`
 2. Verás la pantalla de inicio de sesión
 
-### Usuarios de Prueba
+### Modo Desarrollo
 
-El script de inicialización crea usuarios de prueba (contraseña para todos: `admin123`):
+El sistema cuenta con un **modo desarrollo** que permite:
+- Iniciar sesión sin credenciales (dejar campos vacíos)
+- Seleccionar el rol directamente desde un dropdown
+- Probar la aplicación con diferentes roles sin necesidad de registrarse
 
-- **Admin**: `admin@derecho.edu`
-- **Profesor**: `juan.perez@derecho.edu`
-- **Estudiante**: `maria.gonzalez@derecho.edu`
+### Roles y Permisos
 
-**Nota**: Los hashes de contraseña en el script SQL son ejemplos. Para producción, debes generar hashes reales usando bcrypt.
+#### Estudiante
+- Ver dashboard con simulaciones disponibles
+- Ver listado de evaluaciones (solo lectura)
+- Acceder a configuración personal
+- Sin permisos de creación o edición
 
-### Crear nuevos usuarios
+#### Profesor
+- Ver dashboard con opciones de gestión
+- Crear nuevas evaluaciones
+- Editar y eliminar evaluaciones existentes
+- Acceso completo a gestión de evaluaciones
+- Configuración personal
 
-1. Haz clic en "Registrarse" en la pantalla de login
-2. Completa el formulario de registro
-3. Selecciona tu rol (Estudiante o Profesor)
-4. Haz clic en "Registrarse"
+#### Administrador
+- Acceso completo al sistema
+- Panel de administración
+- Gestión de usuarios y evaluaciones
+- Configuración avanzada
 
 ## 🗂️ Estructura del Proyecto
 
@@ -161,7 +191,6 @@ Proyecto ISW test/
 │   ├── routes/
 │   │   └── authRoutes.js        # Rutas de autenticación
 │   ├── .env                     # Variables de entorno
-│   ├── .env.example             # Ejemplo de variables
 │   ├── server.js                # Servidor Express
 │   └── package.json
 │
@@ -172,8 +201,16 @@ Proyecto ISW test/
 │   │   │   ├── Login.css
 │   │   │   ├── Register.jsx     # Componente de Registro
 │   │   │   ├── Register.css
-│   │   │   ├── Dashboard.jsx    # Dashboard principal
-│   │   │   └── Dashboard.css
+│   │   │   ├── Dashboard.jsx    # Dashboard por rol
+│   │   │   ├── Dashboard.css
+│   │   │   ├── Header.jsx       # Header compartido
+│   │   │   ├── Header.css
+│   │   │   ├── Settings.jsx     # Configuración
+│   │   │   ├── Settings.css
+│   │   │   ├── EvaluationManagement.jsx  # Gestión de evaluaciones
+│   │   │   ├── EvaluationManagement.css
+│   │   │   ├── CreateEvaluation.jsx      # Crear evaluación
+│   │   │   └── CreateEvaluation.css
 │   │   ├── services/
 │   │   │   └── api.js           # Servicios API y axios
 │   │   ├── App.jsx              # Componente principal
@@ -183,6 +220,12 @@ Proyecto ISW test/
 │   ├── index.html
 │   ├── vite.config.js
 │   └── package.json
+│
+├── scripts/
+│   ├── start.ps1                # Script para iniciar servidores
+│   ├── create-database.ps1      # Script para crear BD
+│   ├── setup.ps1                # Script de configuración inicial
+│   └── verify-database.ps1      # Verificar conexión BD
 │
 └── README.md
 ```
@@ -194,6 +237,8 @@ Proyecto ISW test/
 - Validación de datos en frontend y backend
 - Protección CORS configurada
 - Variables sensibles en archivo .env (no versionado)
+- Protección contra pérdida de datos en formularios
+- Headers fijos para mejor UX y seguridad visual
 
 ## 🧪 Endpoints de la API
 
@@ -274,14 +319,16 @@ taskkill /PID <PID> /F
 
 ## 🚧 Próximas Funcionalidades
 
-- [ ] Gestión completa de evaluaciones
-- [ ] Sistema de calificaciones
-- [ ] Calendario de evaluaciones
-- [ ] Notificaciones por email
-- [ ] Panel de administración
-- [ ] Exportación de reportes
-- [ ] Sistema de comentarios
-- [ ] Historial de evaluaciones
+- [ ] Sistema completo de simulación de evaluaciones
+- [ ] Sistema de calificaciones con rúbricas
+- [ ] Calendario interactivo de evaluaciones
+- [ ] Notificaciones por email y en tiempo real
+- [ ] Panel de estadísticas y reportes
+- [ ] Exportación de reportes en PDF/Excel
+- [ ] Sistema de comentarios y retroalimentación
+- [ ] Historial completo de evaluaciones
+- [ ] Integración con sistema de videollamadas
+- [ ] Grabación y almacenamiento de evaluaciones
 
 ## 📝 Notas de Desarrollo
 
@@ -290,6 +337,11 @@ taskkill /PID <PID> /F
 - Los tokens JWT tienen una expiración de 7 días
 - Las contraseñas requieren mínimo 6 caracteres
 - Los emails deben tener formato válido
+- Sistema de roles implementado con permisos diferenciados
+- Headers fijos en todas las pantallas para mejor navegación
+- Modal de confirmación al salir de formularios con datos
+- Diseño responsivo y sobrio (colores sólidos, sin gradientes)
+- Navegación inferior simplificada con 3 opciones principales
 
 ## 👥 Contribución
 
