@@ -6,6 +6,8 @@ import Dashboard from './components/Dashboard';
 import Settings from './components/Settings';
 import EvaluationManagement from './components/EvaluationManagement';
 import CreateEvaluation from './components/CreateEvaluation';
+import CommissionManagement from './components/CommissionManagement';
+import CreateCommission from './components/CreateCommission';
 import { authService } from './services/api';
 import './App.css';
 
@@ -97,6 +99,26 @@ function App() {
           element={
             user ? (
               <CreateEvaluation user={user} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route
+          path="/comisiones"
+          element={
+            user ? (
+              <CommissionManagement user={user} userRole={user.rol} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route
+          path="/comisiones/create"
+          element={
+            user ? (
+              <CreateCommission user={user} />
             ) : (
               <Navigate to="/" replace />
             )

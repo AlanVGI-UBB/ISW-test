@@ -1,0 +1,364 @@
+.commission-management-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 70px;
+  padding-top: 60px;
+}
+
+.commission-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-link {
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-link:hover {
+  color: #003366;
+  text-decoration: underline;
+}
+
+.breadcrumb-current {
+  color: #1f1f1f;
+  font-weight: 500;
+}
+
+.breadcrumb-separator {
+  color: #9ca3af;
+}
+
+/* Header Section */
+.commission-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.commission-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1f1f1f;
+  margin: 0;
+}
+
+.create-commission-btn {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.create-commission-btn:hover {
+  background: #002244;
+}
+
+/* Filtros */
+.commission-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 1rem;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #003366;
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
+.filter-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filter-dropdown:hover {
+  border-color: #003366;
+  background: #f9fafb;
+}
+
+.filter-dropdown svg {
+  color: #6b7280;
+}
+
+/* Tabla */
+.commission-table-container {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.commission-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.commission-table thead {
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.commission-table th {
+  text-align: left;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.commission-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s ease;
+}
+
+.commission-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.commission-table td {
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.link-cell {
+  color: #3b82f6;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link-cell:hover {
+  color: #2563eb;
+}
+
+/* Status badges */
+.commission-status-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.status-sorteo {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-pendiente {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-finalizada {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Actions */
+.actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-icon-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.375rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon-btn:hover {
+  background: #f3f4f6;
+  color: #003366;
+}
+
+.action-icon-btn.delete-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.action-sortear-btn {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: background 0.2s ease;
+}
+
+.action-sortear-btn:hover {
+  background: #002244;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  flex: 1;
+  max-width: 100px;
+}
+
+.nav-item span {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.nav-item.active {
+  color: #003366;
+}
+
+.nav-item:hover {
+  color: #003366;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .commission-table-container {
+    overflow-x: auto;
+  }
+
+  .commission-table {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .commission-content {
+    padding: 1rem;
+  }
+
+  .commission-title {
+    font-size: 1.5rem;
+  }
+
+  .commission-header-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .create-commission-btn {
+    width: 100%;
+  }
+
+  .commission-filters {
+    flex-direction: column;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+
+  .filter-dropdown {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
